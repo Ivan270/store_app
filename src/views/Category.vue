@@ -9,7 +9,7 @@
 				v-for="product in products"
 				:key="product.id"
 			>
-				<v-card>
+				<v-card @click="$router.push(`/products/${product.id}`)">
 					<v-img :src="product.image" contain aspect-ratio="1">
 						<v-app-bar flat color="rgba(0, 0, 0, 0.6)" dark>
 							<v-toolbar-title class="text-h6 font-weight-light">{{
@@ -53,7 +53,6 @@
 					if (!response.ok)
 						throw 'Something went wrong with the API - Category';
 					let data = await response.json();
-					console.log(data);
 					this.products = data;
 				} catch (error) {
 					console.log(error);

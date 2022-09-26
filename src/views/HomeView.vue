@@ -8,7 +8,7 @@
 				v-for="(category, index) in categories"
 				:key="index"
 			>
-				<v-card @click="$router.push(`/category/${category}`)">
+				<v-card @click="$router.push(`/categories/${category}`)">
 					<v-img
 						aspect-ratio="1.7778"
 						cover
