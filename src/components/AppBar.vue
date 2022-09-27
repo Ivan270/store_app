@@ -1,5 +1,5 @@
 <template>
-	<v-app-bar app color="green darken-4" dark dense flat>
+	<v-app-bar app color="green darken-4" dark flat>
 		<v-container>
 			<v-row justify="center" align="center">
 				<v-menu offset-y>
@@ -12,7 +12,7 @@
 						<v-list-item
 							v-for="(category, index) in categories"
 							:key="index"
-							@click="$router.push('/test')"
+							@click="$router.push(`/categories/${category}`)"
 						>
 							<v-list-item-title class="text-capitalize">{{
 								category
@@ -21,15 +21,17 @@
 					</v-list>
 				</v-menu>
 				<v-spacer></v-spacer>
-				<v-btn icon to="/"><v-icon>mdi-home</v-icon></v-btn>
-				<v-btn icon x-large><v-icon>mdi-cart-variant</v-icon> </v-btn>
+				<v-btn icon to="/" class="me-5"><v-icon>mdi-home</v-icon></v-btn>
+				<v-badge :content="cartCount" :value="cartCount > 0">
+					<v-icon @click="$router.push('/cart')">mdi-cart-variant</v-icon>
+				</v-badge>
 			</v-row>
 		</v-container>
 	</v-app-bar>
 </template>
 
 <script>
-	import { mapState, mapActions } from 'vuex';
+	import { mapState, mapActions, mapGetters } from 'vuex';
 	export default {
 		name: 'app-bar',
 		// props: {},
@@ -38,6 +40,7 @@
 		},
 		computed: {
 			...mapState(['categories']),
+			...mapGetters(['cartCount']),
 		},
 		methods: {
 			...mapActions(['fetchCategories']),

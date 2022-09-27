@@ -1,8 +1,9 @@
 <template>
 	<v-container class="pa-16" fill-height>
+		<v-btn text @click="$router.go(-1)">Back</v-btn>
 		<v-row>
 			<v-col cols="12" md="6">
-				<v-sheet outlined rounded>
+				<v-sheet rounded>
 					<v-img
 						:src="this.product.image"
 						height="400"
@@ -24,12 +25,14 @@
 						size="24"
 						:value="this.product.rating.rate"
 					></v-rating>
-					<p class="text-caption">{{ this.product.rating.count }} reviews</p>
+					<p class="text-caption my-auto">
+						{{ this.product.rating.count }} reviews
+					</p>
 				</v-row>
 				<v-divider class="my-10"></v-divider>
 				<h2>${{ this.product.price }}</h2>
 				<v-row>
-					<v-col cols="2" class="">
+					<v-col cols="2">
 						<p class="mb-0 pb-0">Quantity</p>
 
 						<v-text-field
@@ -39,10 +42,16 @@
 							outlined
 							dense
 							type="number"
+							placeholder="amount"
 						/>
 					</v-col>
+					<v-col cols="3" class="d-flex flex-column justify-center">
+						<v-btn icon @click="remove()"
+							><v-icon color="red">mdi-trash-can-outline</v-icon></v-btn
+						></v-col
+					>
 				</v-row>
-				<v-btn block color="orange" dark>Add to cart</v-btn>
+				<v-btn block color="deep-orange" dark @click="add()">Add to cart</v-btn>
 			</v-col>
 			<v-col cols="12">
 				<v-divider class="my-10"></v-divider>
@@ -56,17 +65,19 @@
 </template>
 
 <script>
+	import { mapActions } from 'vuex';
 	export default {
 		name: 'product-view',
 		props: ['id'],
 		data: function () {
 			return {
 				product: [],
-				amount: null,
+				amount: 0,
 			};
 		},
 		// computed: {},
 		methods: {
+			...mapActions(['addToCart', 'removeProduct']),
 			async fetchProduct() {
 				try {
 					let response = await fetch(
@@ -78,6 +89,24 @@
 				} catch (error) {
 					console.log(error);
 				}
+			},
+			add() {
+				if (this.amount >= 1) {
+					let prod = {
+						id: this.product.id,
+						title: this.product.title,
+						price: this.product.price,
+						image: this.product.image,
+						count: 1 * this.amount,
+					};
+					this.addToCart(prod);
+				} else {
+					// CREAR ALERT
+					alert('Enter amount');
+				}
+			},
+			remove() {
+				this.removeProduct(this.product);
 			},
 		},
 		// watch: {},
