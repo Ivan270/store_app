@@ -65,7 +65,7 @@
 </template>
 
 <script>
-	import { mapActions } from 'vuex';
+	import { mapActions, mapGetters } from 'vuex';
 	export default {
 		name: 'product-view',
 		props: ['id'],
@@ -75,7 +75,9 @@
 				amount: 0,
 			};
 		},
-		// computed: {},
+		computed: {
+			...mapGetters(['cartProducts']),
+		},
 		methods: {
 			...mapActions(['addToCart', 'removeProduct']),
 			async fetchProduct() {
@@ -97,7 +99,7 @@
 						title: this.product.title,
 						price: this.product.price,
 						image: this.product.image,
-						count: 1 * this.amount,
+						count: parseInt(this.amount),
 					};
 					this.addToCart(prod);
 				} else {
@@ -108,6 +110,14 @@
 			remove() {
 				this.removeProduct(this.product);
 			},
+			productCount() {
+				this.cartProducts.forEach((prod) => {
+					if (this.id == prod.id) {
+						console.log(prod.count);
+						this.amount = prod.count;
+					}
+				});
+			},
 		},
 		// watch: {},
 		// components: {},
@@ -116,7 +126,9 @@
 		// -- Lifecycle Methods
 		created() {
 			this.fetchProduct();
+			this.productCount();
 		},
+
 		// -- End Lifecycle Methods
 	};
 </script>

@@ -15,6 +15,7 @@ export default new Vuex.Store({
 		cartProducts(state) {
 			return state.cart.map((prod) => {
 				let theProd = prod;
+				// Definir maximo de decimales
 				theProd.total = prod.count * prod.price;
 				return theProd;
 			});
@@ -27,8 +28,16 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		SET_CATEGORIES(state, categories) {
-			state.categories = categories;
+			let cats = categories.map((category) => {
+				let cat = {
+					name: category,
+					path: `/categories/${category}`,
+				};
+				return cat;
+			});
+			state.categories = cats;
 		},
+
 		ADD_TO_CART(state, product) {
 			let exists = state.cart.some((prod) => prod.id == product.id);
 			if (!exists) {
@@ -36,7 +45,7 @@ export default new Vuex.Store({
 			} else {
 				state.cart.forEach((p) => {
 					if (p.id == product.id) {
-						p.count += 1;
+						p.count = product.count;
 					}
 				});
 			}
@@ -49,6 +58,13 @@ export default new Vuex.Store({
 					} else {
 						p.count -= 1;
 					}
+				}
+			});
+		},
+		PLUS_ITEM_CART(state, product) {
+			state.cart.forEach((p) => {
+				if (p.id == product.id) {
+					p.count += 1;
 				}
 			});
 		},
@@ -73,11 +89,15 @@ export default new Vuex.Store({
 				console.log(error);
 			}
 		},
+
 		addToCart({ commit }, product) {
 			commit('ADD_TO_CART', product);
 		},
 		minusItem({ commit }, product) {
 			commit('MINUS_ITEM_CART', product);
+		},
+		plusItem({ commit }, product) {
+			commit('PLUS_ITEM_CART', product);
 		},
 		emptyCart({ commit }) {
 			commit('EMPTY_CART');
