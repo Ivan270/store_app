@@ -1,7 +1,24 @@
 <template>
-	<v-container class="pa-16" fill-height>
-		<v-btn text @click="$router.go(-1)">Back</v-btn>
-		<v-row>
+	<v-container>
+		<div>
+			<v-alert
+				:value="alert"
+				v-model="alert"
+				color="error"
+				dark
+				border="top"
+				icon="mdi-alert"
+				transition="scale-transition"
+				dismissible
+				prominent
+			>
+				Please specify an amount to be added to the cart
+			</v-alert>
+		</div>
+		<v-row justify="center">
+			<v-col cols="12" class="d-flex justify-start ms-3">
+				<v-btn text @click="$router.go(-1)">Back</v-btn>
+			</v-col>
 			<v-col cols="12" md="6">
 				<v-sheet rounded>
 					<v-img
@@ -56,11 +73,19 @@
 			<v-col cols="12">
 				<v-divider class="my-10"></v-divider>
 			</v-col>
-			<h1 class="text-h4 mb-3">Product description {{ this.product.title }}</h1>
-			<p>{{ this.product.description }}</p>
 		</v-row>
 
-		<v-row> </v-row>
+		<v-row justify="center" justify-md="start">
+			<v-col cols="12" md="6">
+				<v-card tile elevation="0" outlined class="pa-10">
+					<h1 class="text-h6 mb-3">Product description</h1>
+					<h1 class="text-h6 green--text text--darken-4 mb-5">
+						{{ this.product.title }}
+					</h1>
+					<p class="text-body-2">{{ this.product.description }}</p>
+				</v-card>
+			</v-col>
+		</v-row>
 	</v-container>
 </template>
 
@@ -73,6 +98,7 @@
 			return {
 				product: [],
 				amount: 0,
+				alert: false,
 			};
 		},
 		computed: {
@@ -97,14 +123,15 @@
 					let prod = {
 						id: this.product.id,
 						title: this.product.title,
-						price: this.product.price,
+						price: Number(this.product.price).toLocaleString('en-US'),
 						image: this.product.image,
 						count: parseInt(this.amount),
 					};
 					this.addToCart(prod);
 				} else {
 					// CREAR ALERT
-					alert('Enter amount');
+					// Falta arreglarlo
+					this.alert = true;
 				}
 			},
 			remove() {

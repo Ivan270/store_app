@@ -2,10 +2,11 @@
 	<v-hover v-slot="{ hover }">
 		<v-card
 			:elevation="hover ? 12 : 0"
-			class="pa-3 overflow-hidden transition-fast-in-fast-out"
+			class="pa-3 transition-fast-in-fast-out"
 			flat
-			height="280"
-			width="500"
+			outlined
+			width="300"
+			:to="`/products/${product.id}`"
 		>
 			<v-img
 				:src="product.image"
@@ -26,30 +27,17 @@
 							>
 							<v-col cols="12"
 								><h6 class="text-h4 font-weight-black">
-									${{ product.price }}
+									${{ Number(product.price).toLocaleString('en-US') }}
 								</h6></v-col
 							>
 						</v-row>
 					</v-container>
 				</v-expand-transition>
 			</v-img>
-			<v-divider class="mx-4"></v-divider>
-
 			<v-card-actions>
-				<v-btn text @click="$router.push(`/products/${product.id}`)"
-					>More</v-btn
-				>
-				<v-spacer></v-spacer>
-				<v-badge
-					overlap
-					:content="count"
-					:value="count > 0"
-					color="deep-orange"
-				>
-					<v-btn icon color="green darken-4" @click="add(product)"
-						><v-icon>mdi-cart-variant</v-icon></v-btn
-					>
-				</v-badge>
+				<v-card-title class="text-body-2 font-weight-bold">
+					{{ product.title }}
+				</v-card-title>
 			</v-card-actions>
 		</v-card>
 	</v-hover>

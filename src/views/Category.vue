@@ -1,15 +1,12 @@
 <template>
-	<v-container class="ma-16">
+	<v-container>
 		<v-row justify="center">
 			<v-col cols="12" class="d-flex justify-start ms-3">
 				<v-btn text @click="$router.go(-1)" class="mb-5" outlined>Back</v-btn>
 			</v-col>
 
 			<v-col
-				cols="12"
-				sm="6"
-				lg="4"
-				xl="3"
+				cols="auto"
 				v-for="product in products"
 				:key="product.id"
 				class="d-flex align-stretch"
