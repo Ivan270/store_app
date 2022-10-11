@@ -1,5 +1,5 @@
 <template>
-	<v-container fill-height>
+	<v-container class="mt-10">
 		<v-row v-if="cartCount < 1" justify="center" align="center">
 			<v-col
 				cols="10"

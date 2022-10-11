@@ -17,7 +17,7 @@
 		</div>
 		<v-row justify="center">
 			<v-col cols="12" class="d-flex justify-start ms-3">
-				<v-btn text @click="$router.go(-1)">Back</v-btn>
+				<v-btn text @click="$router.go(-1)" outlined>Back</v-btn>
 			</v-col>
 			<v-col cols="12" md="6">
 				<v-sheet rounded>
@@ -86,11 +86,34 @@
 				</v-card>
 			</v-col>
 		</v-row>
+		<v-snackbar
+			v-model="snackbar"
+			multi-line
+			color="success"
+			elevation="24"
+			text
+			timeout="2000"
+		>
+			The product has been added to the shopping cart
+
+			<template v-slot:action="{ attrs }">
+				<v-btn
+					x-small
+					color="red"
+					text
+					v-bind="attrs"
+					@click="snackbar = false"
+				>
+					Close
+				</v-btn>
+			</template>
+		</v-snackbar>
 	</v-container>
 </template>
 
 <script>
 	import { mapActions, mapGetters } from 'vuex';
+	// import SuccessSnackbar from '@/components/Snackbar.vue';
 	export default {
 		name: 'product-view',
 		props: ['id'],
@@ -99,6 +122,7 @@
 				product: [],
 				amount: 0,
 				alert: false,
+				snackbar: false,
 			};
 		},
 		computed: {
@@ -119,19 +143,23 @@
 				}
 			},
 			add() {
-				if (this.amount >= 1) {
-					let prod = {
-						id: this.product.id,
-						title: this.product.title,
-						price: Number(this.product.price).toLocaleString('en-US'),
-						image: this.product.image,
-						count: parseInt(this.amount),
-					};
-					this.addToCart(prod);
+				if (this.getProdCount() === this.amount) {
+					alert('error son iguales');
 				} else {
-					// CREAR ALERT
-					// Falta arreglarlo
-					this.alert = true;
+					if (this.amount >= 1) {
+						let prod = {
+							id: this.product.id,
+							title: this.product.title,
+							price: Number(this.product.price).toLocaleString('en-US'),
+							image: this.product.image,
+							count: parseInt(this.amount),
+						};
+						this.addToCart(prod);
+						this.snackbar = true;
+						this.productCount();
+					} else {
+						this.alert = true;
+					}
 				}
 			},
 			remove() {
@@ -140,20 +168,30 @@
 			productCount() {
 				this.cartProducts.forEach((prod) => {
 					if (this.id == prod.id) {
-						console.log(prod.count);
 						this.amount = prod.count;
+					}
+				});
+			},
+			getProdCount() {
+				return this.cartProducts.forEach((prod) => {
+					if (this.id == prod.id) {
+						console.log(prod.count);
+						return prod.count;
 					}
 				});
 			},
 		},
 		// watch: {},
-		// components: {},
+		components: {
+			// SuccessSnackbar,
+		},
 		// mixins: [],
 		// filters: {},
 		// -- Lifecycle Methods
 		created() {
 			this.fetchProduct();
 			this.productCount();
+			// this.getProdCount();
 		},
 
 		// -- End Lifecycle Methods

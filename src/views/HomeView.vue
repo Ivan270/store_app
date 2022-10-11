@@ -1,10 +1,16 @@
 <template>
-	<v-container fill-height>
+	<v-container fill-height fluid>
+		<v-row justify="center">
+			<Header />
+		</v-row>
 		<v-row justify="center" class="ma-5">
+			<v-col cols="12" class="mt10">
+				<h1 class="text-h5">Categories</h1>
+			</v-col>
 			<v-col
 				cols="12"
 				lg="6"
-				xl="4"
+				xl="3"
 				v-for="(category, index) in categories"
 				:key="index"
 			>
@@ -36,12 +42,18 @@
 
 <script>
 	import { mapState } from 'vuex';
+	import Header from '@/components/HeaderCarousel.vue';
 	export default {
 		name: 'Home-view',
+		data: function () {
+			return {};
+		},
 		computed: {
 			...mapState(['categories']),
 		},
 
-		components: {},
+		components: {
+			Header,
+		},
 	};
 </script>
