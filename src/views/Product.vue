@@ -31,7 +31,7 @@
 				<v-chip class="mt-3">{{ this.product.category }}</v-chip>
 			</v-col>
 			<v-col cols="12" md="6">
-				<h1 class="mb-6 text-h3">{{ this.product.title }}</h1>
+				<h1 class="mb-6 text-h5 text-md-h4">{{ this.product.title }}</h1>
 				<v-row>
 					<v-rating
 						length="5"
@@ -113,7 +113,7 @@
 
 <script>
 	import { mapActions, mapGetters } from 'vuex';
-	// import SuccessSnackbar from '@/components/Snackbar.vue';
+
 	export default {
 		name: 'product-view',
 		props: ['id'],

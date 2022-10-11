@@ -4,7 +4,6 @@
 			:elevation="hover ? 12 : 0"
 			class="pa-3 transition-fast-in-fast-out"
 			flat
-			outlined
 			width="300"
 			:to="`/products/${product.id}`"
 		>
@@ -18,13 +17,10 @@
 				<v-expand-transition>
 					<v-container
 						v-if="hover"
-						class="transition-fast-in-fast-out green darken-4 v-card--reveal text-h4 white--text"
+						class="transition-fast-in-fast-out green darken-4 v-card--reveal text-h4 white--text d-flex"
 						style="height: 100%"
 					>
 						<v-row class="text-center">
-							<v-col cols="12"
-								><h5 class="text-body-1">{{ product.title }}</h5></v-col
-							>
 							<v-col cols="12"
 								><h6 class="text-h4 font-weight-black">
 									${{ Number(product.price).toLocaleString('en-US') }}
@@ -35,7 +31,7 @@
 				</v-expand-transition>
 			</v-img>
 			<v-card-actions>
-				<v-card-title class="text-body-2 font-weight-bold">
+				<v-card-title class="text-body-2 black--text">
 					{{ product.title }}
 				</v-card-title>
 			</v-card-actions>
@@ -44,8 +40,6 @@
 </template>
 
 <script>
-	import { mapActions, mapGetters } from 'vuex';
-
 	export default {
 		name: 'category-card',
 		props: ['product'],
@@ -55,41 +49,13 @@
 				count: 0,
 			};
 		},
-		computed: {
-			...mapGetters(['cartProducts']),
-		},
-		methods: {
-			...mapActions(['addToCart']),
-
-			add(prod) {
-				let product = {
-					id: prod.id,
-					title: prod.title,
-					price: prod.price,
-					image: prod.image,
-					count: (this.count += 1),
-				};
-				this.productCount();
-
-				this.addToCart(product);
-			},
-			productCount() {
-				this.cartProducts.forEach((prod) => {
-					if (this.product.id == prod.id) {
-						console.log(prod.count);
-						this.count = prod.count;
-					}
-				});
-			},
-		},
+		// computed: {},
+		// methods: {},
 		// watch: {},
 		// components: {},
 		// mixins: [],
 		// filters: {},
 		// -- Lifecycle Methods
-		created() {
-			this.productCount();
-		},
 		// -- End Lifecycle Methods
 	};
 </script>

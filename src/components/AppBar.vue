@@ -14,7 +14,7 @@
 		</v-system-bar>
 		<v-toolbar color="white" height="90" flat>
 			<v-container>
-				<v-row align="center">
+				<v-row align="center" justify="center">
 					<v-col cols="6" order="2" class="d-flex justify-end">
 						<v-badge
 							:content="cartCount"
