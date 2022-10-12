@@ -15,7 +15,7 @@
 		>
 			<v-container fill-height
 				><v-row justify="center">
-					<h1 class="text-h2 white--text">
+					<h1 class="text-h4 text-md-h2 white--text">
 						Get your products here <v-icon color="white">mdi-arrow-down</v-icon>
 					</h1>
 				</v-row></v-container

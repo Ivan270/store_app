@@ -1,100 +1,106 @@
 <template>
 	<v-container class="mt-10">
-		<v-row v-if="cartCount < 1" justify="center" align="center">
-			<v-col
-				cols="10"
-				md="5"
-				class="d-flex flex-column align-center justify-center"
-			>
-				<v-sheet elevation="10" rounded class="pa-5" color="grey lighten-3">
-					<h1 class="text-h4 text-md-h3 text-center">
-						Nothing in your cart yet
-					</h1>
-					<h6 class="text-subtitle-1 text-center my-6">
-						Go check our products
-					</h6>
-					<v-btn bottom block color="deep-orange" dark to="/">Products</v-btn>
-				</v-sheet>
-			</v-col>
-		</v-row>
-		<v-row v-else>
-			<v-col cols="12">
-				<h1 class="text-h5 text-center">Shopping Basket</h1>
-			</v-col>
-			<v-col cols="12">
-				<v-sheet color="grey lighten-2" class="pa-3" height="60">
-					<h4 class="text-h6">Product(s)</h4>
-				</v-sheet>
-			</v-col>
-			<v-col cols="9">
-				<v-col cols="12" v-for="(product, i) in cartProducts" :key="i">
-					<!-- Transformar en componente -->
-					<v-card flat height="60" class="d-flex align-center">
-						<v-row align="center">
-							<v-col cols="2"
-								><v-avatar tile width="100%"
-									><v-img
-										:src="product.image"
-										contain
-										aspect-ratio="0.7778"
-										class="ms-6"
-									></v-img></v-avatar
-							></v-col>
-							<v-col cols="7">
-								<v-card-title
-									class="text-body-2"
-									v-text="product.title"
-								></v-card-title>
-							</v-col>
-							<v-col cols="3">
+		<v-row justify="center">
+			<v-col cols="10">
+				<v-row v-if="cartCount < 1" justify="center" align="center">
+					<v-col
+						cols="10"
+						md="5"
+						class="d-flex flex-column align-center justify-center"
+					>
+						<v-sheet elevation="10" rounded class="pa-5" color="grey lighten-3">
+							<h1 class="text-h4 text-md-h3 text-center">
+								Nothing in your cart yet
+							</h1>
+							<h6 class="text-subtitle-1 text-center my-6">
+								Go check our products
+							</h6>
+							<v-btn bottom block color="deep-orange" dark to="/"
+								>Products</v-btn
+							>
+						</v-sheet>
+					</v-col>
+				</v-row>
+				<v-row v-else>
+					<v-col cols="12">
+						<h1 class="text-h5 text-center">Shopping Basket</h1>
+					</v-col>
+					<v-col cols="12">
+						<v-sheet color="grey lighten-2" class="pa-3" height="60">
+							<h4 class="text-h6">Product(s)</h4>
+						</v-sheet>
+					</v-col>
+					<v-col cols="9">
+						<v-col cols="12" v-for="(product, i) in cartProducts" :key="i">
+							<!-- Transformar en componente -->
+							<v-card flat height="60" class="d-flex align-center">
 								<v-row align="center">
-									<v-col cols="7" class="d-flex">
-										<v-text-field
-											v-model="product.count"
-											solo
-											dense
-											number
-											append-outer-icon="mdi-plus-box-outline"
-											prepend-icon="mdi-minus-box-outline"
-											@click:append-outer="plusItem(product)"
-											@click:prepend="minusItem(product)"
-										></v-text-field>
-										<v-btn
-											icon
-											color="error"
-											class="ms-6"
-											@click="removeProduct(product)"
-											><v-icon>mdi-trash-can-outline</v-icon></v-btn
-										>
+									<v-col cols="2"
+										><v-avatar tile width="100%"
+											><v-img
+												:src="product.image"
+												contain
+												aspect-ratio="0.7778"
+												class="ms-6"
+											></v-img></v-avatar
+									></v-col>
+									<v-col cols="7">
+										<v-card-title
+											class="text-body-2"
+											v-text="product.title"
+										></v-card-title>
 									</v-col>
+									<v-col cols="3">
+										<v-row align="center">
+											<v-col cols="7" class="d-flex">
+												<v-text-field
+													v-model="product.count"
+													solo
+													dense
+													number
+													append-outer-icon="mdi-plus-box-outline"
+													prepend-icon="mdi-minus-box-outline"
+													@click:append-outer="plusItem(product)"
+													@click:prepend="minusItem(product)"
+												></v-text-field>
+												<v-btn
+													icon
+													color="error"
+													class="ms-6"
+													@click="removeProduct(product)"
+													><v-icon>mdi-trash-can-outline</v-icon></v-btn
+												>
+											</v-col>
 
-									<v-col cols="5">
-										<p class="text-right">Total: ${{ product.total }}</p>
+											<v-col cols="5">
+												<p class="text-right">Total: ${{ product.total }}</p>
+											</v-col>
+										</v-row>
 									</v-col>
 								</v-row>
-							</v-col>
-						</v-row>
-					</v-card>
-				</v-col>
-			</v-col>
-			<v-col cols="3">
-				<v-card
-					outlined
-					color="grey lighten-2"
-					tile
-					elevation="15"
-					class="pa-6 d-flex justify-space-around align-center"
-				>
-					<h3>TOTAL:</h3>
-					<h3>$ {{ cartTotal }}</h3>
-				</v-card>
-				<v-btn block color="deep-orange" class="mt-6" dark to="/checkout"
-					>Proceed to Checkout</v-btn
-				>
-			</v-col>
-			<v-col cols="12">
-				<v-sheet color="grey lighten-2" class="pa-3" dark height="60">
-				</v-sheet>
+							</v-card>
+						</v-col>
+					</v-col>
+					<v-col cols="3">
+						<v-card
+							outlined
+							color="grey lighten-2"
+							tile
+							elevation="15"
+							class="pa-6 d-flex justify-space-around align-center"
+						>
+							<h3>TOTAL:</h3>
+							<h3>$ {{ cartTotal }}</h3>
+						</v-card>
+						<v-btn block color="deep-orange" class="mt-6" dark to="/checkout"
+							>Proceed to Checkout</v-btn
+						>
+					</v-col>
+					<v-col cols="12">
+						<v-sheet color="grey lighten-2" class="pa-3" dark height="60">
+						</v-sheet>
+					</v-col>
+				</v-row>
 			</v-col>
 		</v-row>
 	</v-container>

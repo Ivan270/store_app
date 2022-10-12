@@ -11,7 +11,9 @@
 				<v-col cols="12" md="6" lg="4" order="2" order-md="3">
 					<v-card rounded class="pa-6" elevation="16">
 						<v-row justify="space-between" align="center">
-							<v-card-title>Shopping Cart</v-card-title>
+							<v-card-title class="font-weight-black"
+								>Shopping Cart</v-card-title
+							>
 							<v-btn small icon to="/cart"
 								><v-icon>mdi-pencil-outline</v-icon></v-btn
 							>
@@ -48,7 +50,7 @@
 										Total
 									</h1>
 									<h1 class="text-h5 font-weight-black deep-orange--text">
-										{{ cartTotal }}
+										USD${{ cartTotal }}
 									</h1>
 								</v-row>
 							</v-col>

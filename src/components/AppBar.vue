@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<v-system-bar v-if="$route.path !== '/checkout'" height="30">
+		<!-- Send to: System bar -->
+		<v-system-bar v-if="$route.fullPath !== '/checkout'" height="30">
 			<v-container>
 				<v-row>
 					<v-col cols="12" class="d-flex align-center justify-center">
@@ -12,10 +13,11 @@
 				</v-row>
 			</v-container>
 		</v-system-bar>
+		<!-- Logo and cart bar -->
 		<v-toolbar color="white" height="90" flat>
 			<v-container>
 				<v-row align="center" justify="center">
-					<v-col cols="6" order="2" class="d-flex justify-end">
+					<v-col cols="5" order="2" class="d-flex justify-end">
 						<v-badge
 							:content="cartCount"
 							:value="cartCount > 0"
@@ -32,72 +34,80 @@
 							>
 						</v-badge>
 					</v-col>
-					<v-col cols="6" order="1">
+					<v-col cols="5" order="1">
 						<v-img
 							src="@/assets/store-logo.png"
-							class="shrink"
 							transition="scale-transition"
 							height="90"
 							width="90"
-							contain
+							alt="store logo"
 						></v-img>
 					</v-col>
 				</v-row>
 			</v-container>
+			<!-- Green Bar extension with nav menu -->
 			<template #extension v-if="$route.fullPath !== '/checkout'">
 				<v-toolbar flat dense color="green darken-4" dark>
-					<v-container class="hidden-sm-and-down">
-						<v-row align="center" justify="space-around">
-							<v-btn small icon to="/" class="me-5"
-								><v-icon>mdi-home</v-icon></v-btn
-							>
-
-							<v-col
-								cols="auto"
-								v-for="category in categories"
-								:key="category.name"
-							>
-								<v-btn
-									text
-									plain
-									class="text-capitalize font-weight-light"
-									@click="redirectTo(category.path)"
-									:disabled="currentRoute === category.path"
-									>{{ category.name }}</v-btn
-								>
-							</v-col>
-						</v-row>
-					</v-container>
-					<v-container class="hidden-md-and-up">
+					<v-container>
 						<v-row justify="center">
-							<v-menu
-								offset-y
-								min-width="100vw"
-								transition="slide-y-transition"
-								dark
-								class="primary"
-							>
-								<template v-slot:activator="{ on, attrs }">
-									<v-btn icon dark v-bind="attrs" v-on="on">
-										<v-icon>mdi-menu</v-icon>
-									</v-btn>
-								</template>
-								<v-list color="green darken-4">
-									<v-list-item link class="text-center" to="/">
-										<v-list-item-title>Home</v-list-item-title>
-									</v-list-item>
-									<v-list-item
-										link
-										v-for="category in categories"
-										:key="category.name"
-										class="text-capitalize text-center"
-										@click="redirectTo(category.path)"
-										:disabled="currentRoute === category.path"
-									>
-										<v-list-item-title>{{ category.name }}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
+							<v-col cols="10">
+								<v-container class="hidden-sm-and-down">
+									<v-row align="center" justify="space-between">
+										<v-btn small icon to="/" class="me-5"
+											><v-icon>mdi-home</v-icon></v-btn
+										>
+
+										<v-col
+											cols="auto"
+											v-for="category in categories"
+											:key="category.name"
+										>
+											<v-btn
+												text
+												plain
+												class="text-capitalize font-weight-light"
+												@click="redirectTo(category.path)"
+												:disabled="currentRoute === category.path"
+												>{{ category.name }}</v-btn
+											>
+										</v-col>
+									</v-row>
+								</v-container>
+								<v-container class="hidden-md-and-up">
+									<v-row justify="center">
+										<v-menu
+											offset-y
+											min-width="100vw"
+											transition="slide-y-transition"
+											dark
+											class="primary"
+										>
+											<template v-slot:activator="{ on, attrs }">
+												<v-btn icon dark v-bind="attrs" v-on="on">
+													<v-icon>mdi-menu</v-icon>
+												</v-btn>
+											</template>
+											<v-list color="green darken-4">
+												<v-list-item link class="text-center" to="/">
+													<v-list-item-title>Home</v-list-item-title>
+												</v-list-item>
+												<v-list-item
+													link
+													v-for="category in categories"
+													:key="category.name"
+													class="text-capitalize text-center"
+													@click="redirectTo(category.path)"
+													:disabled="currentRoute === category.path"
+												>
+													<v-list-item-title>{{
+														category.name
+													}}</v-list-item-title>
+												</v-list-item>
+											</v-list>
+										</v-menu>
+									</v-row>
+								</v-container>
+							</v-col>
 						</v-row>
 					</v-container>
 				</v-toolbar>

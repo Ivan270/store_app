@@ -1,17 +1,23 @@
 <template>
 	<v-container>
 		<v-row justify="center">
-			<v-col cols="12" class="d-flex justify-start ms-3">
-				<v-btn text @click="$router.go(-1)" class="mb-5" outlined>Back</v-btn>
-			</v-col>
+			<v-col cols="10">
+				<v-row justify="center">
+					<v-col cols="12" class="d-flex justify-start ms-3">
+						<v-btn text @click="$router.go(-1)" class="mb-5" outlined
+							>Back</v-btn
+						>
+					</v-col>
 
-			<v-col
-				cols="auto"
-				v-for="product in products"
-				:key="product.id"
-				class="d-flex align-stretch"
-			>
-				<ProductCard :product="product" />
+					<v-col
+						cols="auto"
+						v-for="product in products"
+						:key="product.id"
+						class="d-flex align-stretch"
+					>
+						<ProductCard :product="product" />
+					</v-col>
+				</v-row>
 			</v-col>
 		</v-row>
 	</v-container>
