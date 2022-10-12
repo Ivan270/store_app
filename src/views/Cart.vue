@@ -28,6 +28,7 @@
 			</v-col>
 			<v-col cols="9">
 				<v-col cols="12" v-for="(product, i) in cartProducts" :key="i">
+					<!-- Transformar en componente -->
 					<v-card flat height="60" class="d-flex align-center">
 						<v-row align="center">
 							<v-col cols="2"
@@ -87,7 +88,7 @@
 					<h3>TOTAL:</h3>
 					<h3>$ {{ cartTotal }}</h3>
 				</v-card>
-				<v-btn block color="deep-orange" class="mt-6" dark
+				<v-btn block color="deep-orange" class="mt-6" dark to="/checkout"
 					>Proceed to Checkout</v-btn
 				>
 			</v-col>

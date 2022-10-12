@@ -1,88 +1,59 @@
 <template>
-	<v-sheet height="100vh" color="grey lighten-3">
-		<v-container>
-			<h1 class="text-h2 mb-6 text-start">Checkout</h1>
-			<v-row>
-				<v-col cols="7">
-					<v-card shaped elevation="6" class="pa-6 mb-6">
-						<v-form>
-							<v-row justify="start">
-								<v-col cols="12">
-									<h1 class="text-h5">About you</h1>
-								</v-col>
-								<v-col cols="4">
-									<v-text-field
-										color="green darken-4"
-										v-model="firstName"
-										label="First Name"
-									></v-text-field>
-									<v-text-field
-										color="green darken-4"
-										v-model="email"
-										label="E-mail"
-									></v-text-field>
-								</v-col>
-								<v-col cols="4">
-									<v-text-field
-										color="green darken-4"
-										v-model="lastName"
-										label="Last Name"
-									></v-text-field>
-									<v-text-field
-										color="green darken-4"
-										v-model="emailConfirmation"
-										label="Confirm E-mail"
-									></v-text-field>
-								</v-col>
-							</v-row>
-						</v-form>
-					</v-card>
-					<v-card tile elevation="6" class="pa-6">
-						<v-form>
-							<v-row>
-								<v-col cols="12">
-									<h1 class="text-h5">Shipping Information</h1>
-								</v-col>
-								<v-col cols="4">
-									<v-text-field
-										color="green darken-4"
-										v-model="zipCode"
-										label="Zip Code"
-									></v-text-field>
-									<v-text-field
-										color="green darken-4"
-										v-model="stateAddress"
-										label="State or Province"
-									></v-text-field>
-									<v-text-field
-										color="green darken-4"
-										v-model="idNumber"
-										label="ID Number"
-									></v-text-field>
-								</v-col>
-								<v-col cols="4">
-									<v-text-field
-										color="green darken-4"
-										v-model="fullAddress"
-										label="Full Address"
-									></v-text-field>
-									<v-text-field
-										color="green darken-4"
-										v-model="cityAddress"
-										label="City"
-									></v-text-field>
-									<v-text-field
-										color="green darken-4"
-										v-model="phoneNumber"
-										label="Phone Number"
-									></v-text-field>
-								</v-col>
-							</v-row>
-						</v-form>
-					</v-card>
+	<v-sheet height="100%" width="100%" color="grey lighten-3">
+		<v-container fill-height>
+			<v-row justify="center" class="mt-6 mb-3">
+				<v-col cols="12" lg="10" order="1">
+					<h1 class="text-h4 text-start">Checkout</h1>
 				</v-col>
-				<v-col cols="4">
-					<!-- Carrito -->
+				<v-col cols="12" md="6" lg="6" order="3" order-md="2">
+					<CheckoutForm />
+				</v-col>
+				<v-col cols="12" md="6" lg="4" order="2" order-md="3">
+					<v-card rounded class="pa-6" elevation="16">
+						<v-row justify="space-between" align="center">
+							<v-card-title>Shopping Cart</v-card-title>
+							<v-btn small icon to="/cart"
+								><v-icon>mdi-pencil-outline</v-icon></v-btn
+							>
+						</v-row>
+						<v-row>
+							<v-col cols="12" v-for="(product, i) in cartProducts" :key="i">
+								<v-card height="auto" class="pa-2" tile elevation="0">
+									<v-row justify="start" align="center">
+										<v-col cols="2">
+											<v-avatar tile width="60"
+												><v-img :src="product.image" contain></v-img
+											></v-avatar>
+										</v-col>
+										<v-col cols="10">
+											<v-card-title class="text-body-1"
+												>{{ product.title }}<br />
+												Qty: {{ product.count }}</v-card-title
+											>
+										</v-col>
+									</v-row>
+									<v-row justify="end">
+										<v-card-subtitle class="text-body-1 font-weight-bold"
+											>USD${{ product.price }}</v-card-subtitle
+										>
+									</v-row>
+								</v-card>
+								<v-divider></v-divider>
+							</v-col>
+							<v-col cols="12">
+								<v-row class="pa-6" justify="space-between">
+									<h1
+										class="text-h5 text-uppercase font-weight-black deep-orange--text"
+									>
+										Total
+									</h1>
+									<h1 class="text-h5 font-weight-black deep-orange--text">
+										{{ cartTotal }}
+									</h1>
+								</v-row>
+							</v-col>
+						</v-row>
+					</v-card>
 				</v-col>
 			</v-row>
 		</v-container>
@@ -90,27 +61,22 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex';
+	import CheckoutForm from '@/components/CheckoutForm.vue';
 	export default {
 		name: 'component-name',
 		// props: {},
 		data: function () {
-			return {
-				firstName: '',
-				lastName: '',
-				email: '',
-				emailConfirmation: '',
-				zipCode: '',
-				stateAddress: '',
-				idNumber: '',
-				fullAddress: '',
-				cityAddress: '',
-				phoneNumber: '',
-			};
+			return {};
 		},
-		// computed: {},
+		computed: {
+			...mapGetters(['cartProducts', 'cartTotal']),
+		},
 		//methods: {}
 		// watch: {},
-		// components: {},
+		components: {
+			CheckoutForm,
+		},
 		// mixins: [],
 		// filters: {},
 		// -- Lifecycle Methods

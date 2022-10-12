@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-system-bar height="30">
+		<v-system-bar v-if="$route.path !== '/checkout'" height="30">
 			<v-container>
 				<v-row>
 					<v-col cols="12" class="d-flex align-center justify-center">
@@ -44,7 +44,7 @@
 					</v-col>
 				</v-row>
 			</v-container>
-			<template #extension>
+			<template #extension v-if="$route.fullPath !== '/checkout'">
 				<v-toolbar flat dense color="green darken-4" dark>
 					<v-container class="hidden-sm-and-down">
 						<v-row align="center" justify="space-around">
