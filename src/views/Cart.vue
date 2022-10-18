@@ -30,12 +30,12 @@
 							<h4 class="text-h6">Product(s)</h4>
 						</v-sheet>
 					</v-col>
-					<v-col cols="9">
+					<v-col cols="12" xl="9">
 						<v-col cols="12" v-for="(product, i) in cartProducts" :key="i">
 							<!-- Transformar en componente -->
-							<v-card flat height="60" class="d-flex align-center">
+							<v-card flat height="60%" class="d-flex align-center">
 								<v-row align="center">
-									<v-col cols="2"
+									<v-col cols="6" xl="2" class="my-6"
 										><v-avatar tile width="100%"
 											><v-img
 												:src="product.image"
@@ -44,15 +44,15 @@
 												class="ms-6"
 											></v-img></v-avatar
 									></v-col>
-									<v-col cols="7">
+									<v-col cols="6" xl="7">
 										<v-card-title
 											class="text-body-2"
 											v-text="product.title"
 										></v-card-title>
 									</v-col>
-									<v-col cols="3">
+									<v-col cols="12" xl="3">
 										<v-row align="center">
-											<v-col cols="8" class="d-flex">
+											<v-col cols="6" md="4" lg="3" xl="8" class="d-flex">
 												<v-text-field
 													v-model="product.count"
 													solo
@@ -72,7 +72,7 @@
 												>
 											</v-col>
 
-											<v-col cols="4">
+											<v-col cols="6" md="8" lg="9" xl="4">
 												<p class="text-right font-weight-bold">
 													${{ product.total }}
 												</p>
@@ -83,7 +83,7 @@
 							</v-card>
 						</v-col>
 					</v-col>
-					<v-col cols="3">
+					<v-col cols="12" xl="3">
 						<v-card
 							outlined
 							color="grey lighten-2"

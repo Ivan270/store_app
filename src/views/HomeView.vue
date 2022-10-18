@@ -22,6 +22,18 @@
 								cover
 								:src="require(`@/assets/${category.name}.jpg`)"
 							>
+								<template v-slot:placeholder>
+									<v-row
+										align="center"
+										class="fill-height ma-0"
+										justify="center"
+									>
+										<v-progress-circular
+											color="green darken-4"
+											indeterminate
+										></v-progress-circular>
+									</v-row>
+								</template>
 								<v-app-bar
 									absolute
 									bottom

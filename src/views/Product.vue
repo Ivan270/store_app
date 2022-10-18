@@ -26,7 +26,17 @@
 						height="400"
 						aspect-ratio="1"
 						contain
-					></v-img>
+						transition="scale-transition"
+					>
+						<template v-slot:placeholder>
+							<v-row align="center" class="fill-height ma-0" justify="center">
+								<v-progress-circular
+									color="green darken-4"
+									indeterminate
+								></v-progress-circular>
+							</v-row>
+						</template>
+					</v-img>
 				</v-sheet>
 				<v-chip class="mt-3">{{ this.product.category }}</v-chip>
 			</v-col>
