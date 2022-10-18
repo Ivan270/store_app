@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="!$route.meta.hideNavbar">
 		<!-- Send to: System bar -->
 		<v-system-bar v-if="$route.fullPath !== '/checkout'" height="30">
 			<v-container>
@@ -45,7 +45,7 @@
 					</v-col>
 				</v-row>
 			</v-container>
-			<!-- Green Bar extension with nav menu -->
+			<!-- Green Bar extension with NAV menu -->
 			<template #extension v-if="$route.fullPath !== '/checkout'">
 				<v-toolbar flat dense color="green darken-4" dark>
 					<v-container>

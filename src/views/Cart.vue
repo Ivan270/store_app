@@ -52,7 +52,7 @@
 									</v-col>
 									<v-col cols="3">
 										<v-row align="center">
-											<v-col cols="7" class="d-flex">
+											<v-col cols="8" class="d-flex">
 												<v-text-field
 													v-model="product.count"
 													solo
@@ -66,14 +66,16 @@
 												<v-btn
 													icon
 													color="error"
-													class="ms-6"
+													class="ms-2"
 													@click="removeProduct(product)"
 													><v-icon>mdi-trash-can-outline</v-icon></v-btn
 												>
 											</v-col>
 
-											<v-col cols="5">
-												<p class="text-right">Total: ${{ product.total }}</p>
+											<v-col cols="4">
+												<p class="text-right font-weight-bold">
+													${{ product.total }}
+												</p>
 											</v-col>
 										</v-row>
 									</v-col>
@@ -90,7 +92,7 @@
 							class="pa-6 d-flex justify-space-around align-center"
 						>
 							<h3>TOTAL:</h3>
-							<h3>$ {{ cartTotal }}</h3>
+							<h3>USD$ {{ cartTotal }}</h3>
 						</v-card>
 						<v-btn block color="deep-orange" class="mt-6" dark to="/checkout"
 							>Proceed to Checkout</v-btn

@@ -32,6 +32,13 @@ const routes = [
 		path: '/checkout',
 		component: Checkout,
 	},
+	{
+		path: '/confirmation/:orderId',
+		component: () =>
+			import(/* webpackChunkName: "confirmation" */ '@/views/Confirmation.vue'),
+		props: true,
+		meta: { hideNavbar: true },
+	},
 ];
 
 const router = new VueRouter({

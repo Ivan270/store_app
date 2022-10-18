@@ -7,6 +7,7 @@ export default new Vuex.Store({
 	state: {
 		categories: [],
 		cart: [],
+		purchaseSummary: [],
 	},
 	getters: {
 		cartCount(state) {
@@ -75,6 +76,12 @@ export default new Vuex.Store({
 			let index = state.cart.indexOf(product);
 			state.cart.splice(index, 1);
 		},
+		ADD_ORDER(state, purchase) {
+			let order = {
+				total: purchase.total,
+			};
+			state.purchaseSummary.push(order);
+		},
 	},
 	actions: {
 		async fetchCategories() {
@@ -104,6 +111,9 @@ export default new Vuex.Store({
 		},
 		removeProduct({ commit }, product) {
 			commit('REMOVE_PRODUCT', product);
+		},
+		addOrder({ commit }, purchase) {
+			commit('ADD_ORDER', purchase);
 		},
 	},
 	modules: {},
