@@ -23,7 +23,7 @@
 				</v-row>
 				<v-row v-else>
 					<v-col cols="12">
-						<h1 class="text-h5 text-center">Shopping Basket</h1>
+						<h1 class="text-h4 text-start">Shopping Basket</h1>
 					</v-col>
 					<v-col cols="12">
 						<v-sheet color="grey lighten-2" class="pa-3" height="60">
@@ -33,18 +33,18 @@
 					<v-col cols="12" xl="9">
 						<v-col cols="12" v-for="(product, i) in cartProducts" :key="i">
 							<!-- Transformar en componente -->
-							<v-card flat height="60%" class="d-flex align-center">
-								<v-row align="center">
-									<v-col cols="6" xl="2" class="my-6"
-										><v-avatar tile width="100%"
+							<v-card flat height="60%">
+								<v-row align="center" justify="space-between">
+									<v-col cols="4" xl="2"
+										><v-avatar tile size="50%"
 											><v-img
 												:src="product.image"
 												contain
 												aspect-ratio="0.7778"
-												class="ms-6"
+												class="ms-0 ms-lg-6"
 											></v-img></v-avatar
 									></v-col>
-									<v-col cols="6" xl="7">
+									<v-col cols="4" xl="7">
 										<v-card-title
 											class="text-body-2"
 											v-text="product.title"
