@@ -22,11 +22,11 @@
 					<v-col cols="12" class="d-flex justify-start ms-3">
 						<v-btn text @click="$router.go(-1)" outlined>Back</v-btn>
 					</v-col>
-					<v-col cols="12" md="6">
+					<v-col cols="12" md="6" align-self="end">
 						<v-sheet rounded>
 							<v-img
 								:src="this.product.image"
-								height="400"
+								height="150"
 								aspect-ratio="1"
 								contain
 								transition="scale-transition"
@@ -65,27 +65,25 @@
 						</v-row>
 						<v-divider class="my-10"></v-divider>
 						<h2>${{ this.product.price }}</h2>
-						<v-row>
+						<v-row class="mt-6">
 							<v-col cols="5" lg="3">
-								<p class="mb-0 pb-0">Quantity</p>
+								<p class="mb-3 pb-0">Quantity</p>
 
 								<v-text-field
+									solo
 									class="mt-0 pt-0"
 									v-model="amount"
-									hide-spin-buttons
-									single-line
-									outlined
 									dense
-									type="number"
+									rounded
+									autofocus
+									color="green darken-4"
+									number
 									placeholder="amount"
-								>
-									<v-icon slot="append-outer" @click="amount++">
-										mdi-plus-circle-outline
-									</v-icon>
-									<v-icon slot="prepend" @click="reduceAmount">
-										mdi-minus-circle-outline
-									</v-icon>
-								</v-text-field>
+									append-outer-icon="mdi-plus-circle-outline"
+									prepend-icon="mdi-minus-circle-outline"
+									@click:append-outer="amount++"
+									@click:prepend="reduceAmount"
+								/>
 							</v-col>
 							<v-col cols="3" class="d-flex flex-column justify-center">
 								<v-btn icon @click="remove()"

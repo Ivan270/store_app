@@ -58,8 +58,8 @@
 													solo
 													dense
 													number
-													append-outer-icon="mdi-plus-box-outline"
-													prepend-icon="mdi-minus-box-outline"
+													append-outer-icon="mdi-plus-circle-outline"
+													prepend-icon="mdi-minus-circle-outline"
 													@click:append-outer="plusItem(product)"
 													@click:prepend="minusItem(product)"
 												></v-text-field>
