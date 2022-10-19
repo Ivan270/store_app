@@ -24,7 +24,7 @@
 					class="mb-3"
 					@load="loaded"
 				>
-					<v-expand-transition>
+					<v-expand-transition v-if="!isLoading">
 						<v-container
 							v-if="hover"
 							class="transition-fast-in-fast-out green darken-4 v-card--reveal text-h4 white--text d-flex"
@@ -40,7 +40,7 @@
 						</v-container>
 					</v-expand-transition>
 				</v-img>
-				<v-card-actions>
+				<v-card-actions v-if="!isLoading">
 					<v-card-title class="text-body-2 black--text">
 						{{ product.title }}
 					</v-card-title>
