@@ -1,6 +1,6 @@
 <template>
 	<div v-if="!$route.meta.hideNavbar">
-		<!-- Send to: System bar -->
+		<!-- 'Send to' with geolocated info : System bar -->
 		<v-system-bar v-if="$route.fullPath !== '/checkout'" height="30">
 			<v-container>
 				<v-row>
@@ -137,7 +137,7 @@
 		methods: {
 			async locationInformation() {
 				try {
-					const API_KEY = '4900db5bc5714f39bf143c2116a4aec4';
+					const API_KEY = 'c3e507dec98440a889f3e88672a9e686';
 					const API_URL =
 						'https://ipgeolocation.abstractapi.com/v1/?api_key=' + API_KEY;
 					const apiResponse = await fetch(API_URL);
